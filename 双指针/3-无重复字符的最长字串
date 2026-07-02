@@ -1,0 +1,21 @@
+from typing import List
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        不要重复!集合set
+        """
+        slow = 0
+        fast = 0
+        max_len = 0
+        my_set = set()
+        while fast < len(s):
+            if s[fast] in my_set:
+                my_set.remove(s[slow])
+                slow += 1
+            else:
+                my_set.add(s[fast])
+                max_len = max(max_len, fast - slow + 1)
+                fast += 1
+        return max_len
+           
