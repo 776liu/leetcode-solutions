@@ -1,0 +1,23 @@
+
+
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+
+        原地操作,不使用额外空间(常数级别复杂度),双指针,快慢指针
+        读到不同数据,写指针右移,remove,写入
+        """
+        write = 0
+        read = 0
+        while read < len(nums):
+            if nums[read] == nums[write]:
+                read += 1
+            else:
+                write += 1
+                nums[write] = nums[read]
+
+        return write + 1
+
+        
