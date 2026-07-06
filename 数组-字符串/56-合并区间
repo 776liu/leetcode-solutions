@@ -1,0 +1,45 @@
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+
+        区间合并，判断区间是否重叠，比较开头数。不重叠则记录，注意要先排序，再比较合并
+        """
+        # # 先排序
+        # intervals.sort(key = lambda x: x[0])
+
+        # #在合并
+        # res = []
+        # i = 0
+        # cur = intervals[0]
+        # while i+1 < len(intervals):
+            
+        #     next = intervals[i+1]
+
+        #     if cur[1] >= next[0]:
+        #         cur[1] = max(cur[1], next[1])
+        #     else:
+        #         res.append(cur)
+        #         cur = next
+        #     i += 1
+        # res.append(cur)
+        # return res
+
+        # 先排序
+        intervals.sort(key = lambda x: x[0])
+
+        #在合并
+        res = []
+        for i in intervals:
+            
+            # 索引当前的intervals的左边界和res里最后一个元素的右边界进行比较
+            if  res and i[0] <= res[-1][1]:
+                res[-1][1] = max(i[1], res[-1][1])
+            else:
+                res.append(i)
+        return res
+
+
+
+

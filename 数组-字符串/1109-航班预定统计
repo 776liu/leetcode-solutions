@@ -1,0 +1,45 @@
+class Solution(object):
+    def corpFlightBookings(self, bookings, n):
+        """
+        :type bookings: List[List[int]]
+        :type n: int
+        :rtype: List[int]
+
+        直接累加会超时
+        """
+        
+        answer = [0]*n
+        for first, last, sets in bookings:
+            for i in range(first - 1, last):
+                answer += sets
+
+        return answer 
+    
+
+    def corpFlightBookings2(self, bookings, n):
+        """
+        :type bookings: List[List[int]]
+        :type n: int
+        :rtype: List[int]
+
+        差分数组,记录区间变化
+        大块区间统一修改，差分数组。
+        """
+
+        diff = [0]*(n+1)
+        answer = [0]*n
+
+        for first, last, seats in bookings:
+            diff[first - 1] += seats
+            diff[last] -= seats
+        
+        last_seats = 0
+        for i in range(n):
+            answer[i] = diff[i] + last_seats
+            last_seats = answer[i]
+
+        return answer
+
+
+        
+            
